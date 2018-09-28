@@ -10,13 +10,19 @@
     <title>ChatOne</title>
 </head>
 <body>
-    <h1>HI THERE!!!</h1>
-    <button>Increment</button>
+    <nav>
+        <p>Username: {{ user_data["user_name"] }}</p>
+    </nav>
+    <section id="chat_rooms">
+        Chat rooms go here
+        <ul id="chat_room_list">
+        </ul>
+    </section>
     <div id="chat_window">
         <ul id="chat_window_list" >
         </ul>
     </div>
-    <form action="" id="chat_box">
+    <form action="" id="chat_box" method="GET">
         <input type="text" name="chat_input" id="chat_input">
         <input type="submit">
     </form>
