@@ -19,8 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('announce chat', data => {
         const li = document.createElement('li')
+        const ul = document.querySelector('#chat_window_list')
         li.innerHTML = data['chat_text']
-        document.querySelector('#chat_window_list').appendChild(li)
+        
+        if(ul.clientHeight+ul.scrollTop >= ul.scrollHeight){
+            ul.appendChild(li)
+            li.scrollIntoView()
+        } else{
+            ul.appendChild(li)
+        }
         // document.querySelector('h1').innerHTML = data['chat_text']
     })
 

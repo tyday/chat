@@ -1,12 +1,12 @@
 #chat_window_list{
-    position: relative;
+    /* position: relative; */
     overflow-y: auto;
     height: 200px;
     border: 2px solid;
-    display: flex;
+    /* display: flex; */
     /* flex-wrap: wrap; */
-    flex-direction: column;
-    justify-content: flex-end;
+    /* flex-direction: column; */
+    /* justify-content: flex-end; */
 }
 #chat_window_list li{
     /* width: 100%; */
