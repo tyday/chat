@@ -12,6 +12,7 @@
 <body>
     <nav>
         <p>Username: {{ user_data["user_name"] }}</p>
+        <a href="{{ url_for('logout') }}">logout</a>
     </nav>
     <section id="chat_rooms">
         Chat rooms go here

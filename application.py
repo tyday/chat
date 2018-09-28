@@ -45,17 +45,14 @@ def login_auth():
             chat_room = 0
             session['chat_room'] = chat_room
             print (session['chat_room'])
-        
     return redirect(url_for('index'))
-    # if request.method == 'POST':
-    #     user_name = request.form['user_name']
-    #     resp = make_response(render_template('index.html'))
-    #     resp.set_cookie('user_name', user_name)
-    #     chat_room = request.cookies.get("chat_room")
-    #     if not chat_room:
-    #         chat_room = "0"
-    #         resp.set_cookie('chat_room', chat_room)
-    #     return resp
+        
+@app.route('/logout')
+def logout():
+    # session['user_name']=None
+    # session['chat_room']=0
+    session.clear()
+    return redirect(url_for('index'))
         
 
 @socketio.on("submit vote")
