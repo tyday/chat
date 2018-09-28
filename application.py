@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = 'secret!'
 socketio = SocketIO(app)
 
-chat_rooms = {0:{"name":"general","chat_log":[]},1:{"name":"hobbies","chat_log":[]}}
+chat_rooms = {0:{"name":"General","chat_log":[]},1:{"name":"hobbies","chat_log":[]}}
 
 
 @app.route("/")
@@ -22,7 +22,10 @@ def index():
     else:
         # return render_template("login.html")
         return redirect(url_for('login'))
-    user_data = {"user_name":user_name,"chat_room":chat_room}
+    session['chat_room_name'] = chat_rooms[chat_room]["name"]
+    chat_log = chat_rooms[chat_room]["chat_log"]
+    print(chat_log)
+    user_data = {"user_name":user_name,"chat_room":chat_room, "chat_log": chat_log}
     return render_template("index.html", user_data = user_data)
     # username = request.cookies.get('user_name')
     # if not username:
@@ -68,10 +71,9 @@ def chat(data):
     # chat_room = data["chat_room"]
     user_name = session["user_name"]
     chat_room = session["chat_room"]
-    text = data["chat_text"]
-    # print(text)
-    chat_rooms[chat_room]["chat_log"] = text
-    emit("announce chat", {"user_name":user_name, "chat_room":chat_room, "chat_text": text}, broadcast=True)
+    text_log = {"user_name": user_name, "text":data["chat_text"]}
+    chat_rooms[chat_room]["chat_log"].append(text_log)
+    emit("announce chat", {"user_name":user_name, "chat_room":chat_room, "chat_text": data["chat_text"]}, broadcast=True)
     
 if __name__=='__main__':
     socketio.run(app)
