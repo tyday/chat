@@ -7,9 +7,15 @@
     align-content: flex-end; */
 }
 #chat_window_list li{
-    height: 1rem;
+    min-height: 1rem;
     /* width: 100%; */
 }
 #chat_window_list > :first-child{
     margin-top: calc(200px - 1rem);
+}
+#chat_room_list li:hover{
+    font-style: italic;
+}
+#chat_room_list li{
+    cursor: pointer;
 } 

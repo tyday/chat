@@ -22,7 +22,7 @@
             {% endfor %}
         </ul>
     </section>
-    <section id="chat_window">
+    <section id="chat_window" data-room_id="{{ session.chat_room_id }}">
         <h2 id='room_header'>Room: {{ session.chat_room_name }}</h2>
         <ul id="chat_window_list" >
             {% for text in user_data.chat_log %}

@@ -25,6 +25,7 @@ def index():
         # return render_template("login.html")
         return redirect(url_for('login'))
     session['chat_room_name'] = chat_rooms[chat_room]["name"]
+    session['chat_room_id'] = chat_room
     chat_log = chat_rooms[chat_room]["chat_log"]
     print(chat_log)
     print(chat_rooms)
@@ -75,6 +76,23 @@ def chat(data):
     text_log = {"user_name": user_name, "text":data["chat_text"]}
     chat_rooms[chat_room]["chat_log"].append(text_log)
     emit("announce chat", {"user_name":user_name, "chat_room":chat_room, "chat_text": data["chat_text"]}, broadcast=True)
-    
+    print(chat_rooms[chat_room])
+
+@socketio.on("submit room_change")    
+def room_change(data):
+    user_name = session["user_name"]
+    room_source = int(data["room_source"])
+    room_destination = int(data["room_destination"])
+    departure_message = f"{user_name} has left chat."
+    arrival_message = f"{user_name} has entered chat"
+    session["chat_room"] = room_destination;
+    # Update room logs with information
+    # chat_rooms[room_source]["chat_log"].append(departure_message)
+    # chat_rooms[room_destination]["chat_log"].append(arrival_message)
+    # emit Departure chat message
+    emit("announce chat", {"user_name":user_name, "chat_room":room_source, "chat_text": departure_message}, broadcast=True, include_self=False)
+    # emit Arrival chat message
+    emit("announce chat", {"user_name":user_name, "chat_room":room_destination, "chat_text": arrival_message}, broadcast=True)
+
 if __name__=='__main__':
     socketio.run(app)
