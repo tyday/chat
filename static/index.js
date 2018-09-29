@@ -35,7 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 ul.appendChild(li)
             }
         }
-        // document.querySelector('h1').innerHTML = data['chat_text']
+        
+    })
+    socket.on('update room', data => {
+        const ul = document.querySelector('#chat_window_list')
+        for (var i=0; i< data.chat_log.length;i++){
+        // for elem in data{
+            const li = document.createElement('li');
+            li.innerHTML = data.chat_log[i].user_name + ": " + data.chat_log[i].text;
+            ul.appendChild(li);
+            li.scrollIntoView();
+        }
     })
 
     

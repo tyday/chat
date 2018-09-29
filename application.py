@@ -76,7 +76,7 @@ def chat(data):
     text_log = {"user_name": user_name, "text":data["chat_text"]}
     chat_rooms[chat_room]["chat_log"].append(text_log)
     emit("announce chat", {"user_name":user_name, "chat_room":chat_room, "chat_text": data["chat_text"]}, broadcast=True)
-    print(chat_rooms[chat_room])
+    print(chat_rooms[chat_room])  
 
 @socketio.on("submit room_change")    
 def room_change(data):
@@ -93,6 +93,6 @@ def room_change(data):
     emit("announce chat", {"user_name":user_name, "chat_room":room_source, "chat_text": departure_message}, broadcast=True, include_self=False)
     # emit Arrival chat message
     emit("announce chat", {"user_name":user_name, "chat_room":room_destination, "chat_text": arrival_message}, broadcast=True)
-
+    emit("update room", {"chat_log":chat_rooms[room_destination]["chat_log"]})
 if __name__=='__main__':
     socketio.run(app)
