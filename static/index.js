@@ -44,3 +44,13 @@ function submit_chat(x){
     x.emit('submit chat', {'chat_room':chat_room,'chat_text':chat_text})
     return false;
 }
+
+function change_room(key, value){
+    const ul = document.querySelector('#chat_window_list')
+    while (ul.firstChild){
+        ul.removeChild(ul.firstChild);
+    const header = document.querySelector('#room_header')
+    header.innerHTML = `Room: ${value['name']}`
+    
+    }
+}

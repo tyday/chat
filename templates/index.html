@@ -17,16 +17,19 @@
     <section id="chat_rooms">
         Chat rooms go here
         <ul id="chat_room_list">
+            {% for key, value in user_data.chat_rooms.items()  %}
+            <li data-index="{{ key }}" onclick="change_room({{ key  }},{{ value  }})">{{ value['name'] }}</li>
+            {% endfor %}
         </ul>
     </section>
-    <div id="chat_window">
-        <h2>Room: {{ session.chat_room_name }}</h2>
+    <section id="chat_window">
+        <h2 id='room_header'>Room: {{ session.chat_room_name }}</h2>
         <ul id="chat_window_list" >
             {% for text in user_data.chat_log %}
             <li><strong>{{ text.user_name }}</strong> {{ text.text }}</li>
             {% endfor %}
         </ul>
-    </div>
+    </section>
     <form action="" id="chat_box" method="GET">
         <input type="text" name="chat_input" id="chat_input">
         <input type="submit">

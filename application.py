@@ -8,7 +8,9 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = 'secret!'
 socketio = SocketIO(app)
 
-chat_rooms = {0:{"name":"General","chat_log":[]},1:{"name":"hobbies","chat_log":[]}}
+chat_rooms = {0:{"name":"General","chat_log":[]},
+            1:{"name":"hobbies","chat_log":[]},
+            2:{"name":"school","chat_log":[]}}
 
 
 @app.route("/")
@@ -25,7 +27,9 @@ def index():
     session['chat_room_name'] = chat_rooms[chat_room]["name"]
     chat_log = chat_rooms[chat_room]["chat_log"]
     print(chat_log)
-    user_data = {"user_name":user_name,"chat_room":chat_room, "chat_log": chat_log}
+    print(chat_rooms)
+    print(json.dumps(chat_rooms))
+    user_data = {"user_name":user_name,"chat_room":chat_room, "chat_log": chat_log, "chat_rooms":chat_rooms}
     return render_template("index.html", user_data = user_data)
     # username = request.cookies.get('user_name')
     # if not username:
