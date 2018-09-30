@@ -54,10 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ul.appendChild(li);
             li.scrollIntoView();
         }
-    })  
-    // Create new chat room
-
+    })
     // Listen for new chat room
+    socket.on('new room', data => {
+        const ul = document.querySelector('#chat_room_list')
+        const li = document.createElement('li')
+        li.innerHTML = data.room_name
+        li.dataset.index = data.room_id
+        // li.onclick = data.code
+        li.addEventListener("click", function(){
+            change_room(data.room_id,{'name':data.room_name,'chat_log':[]})
+        })
+        ul.appendChild(li)
+    })
 })
 
 function submit_chat(x){

@@ -102,7 +102,7 @@ def new_room(data):
     chat_rooms[room_id] = {"name":room_name,"chat_log":[]}
     onclick_code = f"change_room({room_id},{chat_rooms[room_id]})"
     print(onclick_code)
-    emit("new room", {"room_id":room_id,"code":onclick_code})
+    emit("new room", {"room_name":room_name, "room_id":room_id,"code":onclick_code})
     
 
 
