@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
     socket.on('connect', () => {
-        // document.querySelector('#chat_box').onsubmit = submit_chat(socket);
+        // Create new message
         document.querySelector('#chat_box').onsubmit = () => {
             chat_text = document.querySelector('#chat_input').value;
             chat_room = document.querySelector('#chat_window').dataset.room_id;
@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(chat_text,chat_room);
             socket.emit('submit chat', {'chat_text':chat_text})
             document.querySelector('#chat_input').value = "";
+            return false;
+        }
+
+        // Create new chat room
+        document.querySelector('#room_form').onsubmit = () =>{
+            room_name = document.querySelector('#room_input').value;
+            socket.emit('submit new_room', {'room_name':room_name})
+            document.querySelector('#room_input').value = ""
             return false;
         }
     })
@@ -47,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
             li.scrollIntoView();
         }
     })  
+    // Create new chat room
+
+    // Listen for new chat room
 })
 
 function submit_chat(x){
