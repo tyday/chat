@@ -94,5 +94,17 @@ def room_change(data):
     # emit Arrival chat message
     emit("announce chat", {"user_name":user_name, "chat_room":room_destination, "chat_text": arrival_message}, broadcast=True)
     emit("update room", {"chat_log":chat_rooms[room_destination]["chat_log"]})
+
+@socketio.on("submit new_room")
+def new_room(data):
+    room_name = data['room_name']
+    room_id = len(chat_rooms)
+    chat_rooms[room_id] = {"name":room_name,"chat_log":[]}
+    onclick_code = f"change_room({room_id},{chat_rooms[room_id]})"
+    print(onclick_code)
+    emit("new room", {"room_id":room_id,"code":onclick_code})
+    
+
+
 if __name__=='__main__':
     socketio.run(app)
