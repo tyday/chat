@@ -33,10 +33,11 @@
             <li><strong>{{ text.user_name }}</strong> {{ text.text }}</li>
             {% endfor %}
         </ul>
+        <form action="" id="chat_box" method="GET" autocomplete="off">
+            <input type="text" name="chat_input" id="chat_input">
+            <input type="submit">
+        </form>
     </section>
-    <form action="" id="chat_box" method="GET" autocomplete="off">
-        <input type="text" name="chat_input" id="chat_input">
-        <input type="submit">
-    </form>
+    
 </body>
 </html>
