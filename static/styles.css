@@ -1,17 +1,21 @@
+*{
+    margin: 0;
+    padding:0;
+}
 #chat_window_list{
     overflow-y: auto;
     height: 200px;
     border: 2px solid;
-    /* display: flex;
-    flex-wrap: wrap;
-    align-content: flex-end; */
+}
+#chat_room_list{
+    border: 2px solid;
 }
 #chat_window_list li{
     min-height: 1rem;
     /* width: 100%; */
 }
 #chat_window_list > :first-child{
-    margin-top: calc(200px - 1rem);
+    margin-top: calc(75vh - 1rem);
 }
 #chat_room_list li:hover{
     font-style: italic;
@@ -19,3 +23,57 @@
 #chat_room_list li{
     cursor: pointer;
 } 
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 200px auto;
+    grid-template-rows: 55px auto;
+    grid-template-areas: 
+        "nav nav"
+        "rooms chat_box";
+    column-gap: .5rem;
+}
+nav{
+    grid-area: nav;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+#chat_rooms{
+    grid-area: rooms;
+    display: flex;
+    flex-direction: column;
+}
+#chat_rooms>*{
+    background-color: yellowgreen;
+    flex: 0 0 1rem;
+}
+#chat_rooms>ul{
+    background-color: blueviolet;
+    flex: 1 0 auto;
+}
+#chat_window{
+    grid-area: chat_box;
+    display: flex;
+    flex-direction: column;
+}
+#chat_window>*{
+    background-color: bisque;
+    flex: 0 0 1rem;
+}
+#chat_window>ul{
+    flex: 1 0 auto;
+}
+form{
+    display: flex;
+}
+form>*{
+    flex: 0 0 auto;
+}
+#room_input{
+    flex: 1 0 auto;
+}
+#chat_input{
+    flex: 1 0 auto;
+}
